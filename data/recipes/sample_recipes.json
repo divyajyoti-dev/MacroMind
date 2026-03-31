@@ -1,0 +1,1025 @@
+[
+  {
+    "id": "r001",
+    "name": "Grilled Chicken Rice Bowl",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 150},
+      {"name": "brown rice", "grams": 120},
+      {"name": "broccoli", "grams": 80},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Season chicken with salt and pepper. Grill on medium-high heat 6 min per side. Cook brown rice per package instructions. Steam broccoli 4 min. Drizzle with olive oil. Serve together.",
+    "tags": ["high-protein", "meal-prep", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 3.50
+  },
+  {
+    "id": "r002",
+    "name": "Tuna Salad Wrap",
+    "ingredients": [
+      {"name": "tuna", "grams": 120},
+      {"name": "whole wheat bread", "grams": 60},
+      {"name": "spinach", "grams": 40},
+      {"name": "tomato", "grams": 50},
+      {"name": "onion", "grams": 20}
+    ],
+    "instructions": "Drain tuna. Mix with diced onion and tomato. Layer spinach and tuna mixture on bread. Roll tightly.",
+    "tags": ["high-protein", "quick", "budget"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 2.80
+  },
+  {
+    "id": "r003",
+    "name": "Salmon with Quinoa and Spinach",
+    "ingredients": [
+      {"name": "salmon", "grams": 150},
+      {"name": "quinoa", "grams": 100},
+      {"name": "spinach", "grams": 80},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook quinoa in water 15 min. Season salmon, pan-sear in olive oil 4 min each side. Sauté spinach with garlic. Serve all together.",
+    "tags": ["high-protein", "omega-3", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 6.50
+  },
+  {
+    "id": "r004",
+    "name": "Greek Yogurt Parfait",
+    "ingredients": [
+      {"name": "greek yogurt", "grams": 200},
+      {"name": "banana", "grams": 80},
+      {"name": "oats", "grams": 40}
+    ],
+    "instructions": "Layer Greek yogurt in a bowl. Slice banana on top. Add oats for crunch.",
+    "tags": ["high-protein", "breakfast", "quick", "vegetarian"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 2.20
+  },
+  {
+    "id": "r005",
+    "name": "Egg White Omelette",
+    "ingredients": [
+      {"name": "eggs", "grams": 180},
+      {"name": "spinach", "grams": 50},
+      {"name": "tomato", "grams": 50},
+      {"name": "onion", "grams": 30},
+      {"name": "olive oil", "grams": 5}
+    ],
+    "instructions": "Separate egg whites. Beat until frothy. Cook vegetables in olive oil 3 min. Pour egg whites over, fold when set.",
+    "tags": ["high-protein", "breakfast", "low-carb", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 1.80
+  },
+  {
+    "id": "r006",
+    "name": "Turkey and Black Bean Burrito Bowl",
+    "ingredients": [
+      {"name": "ground beef", "grams": 120},
+      {"name": "black beans", "grams": 100},
+      {"name": "brown rice", "grams": 100},
+      {"name": "tomato", "grams": 60},
+      {"name": "onion", "grams": 40}
+    ],
+    "instructions": "Brown ground beef with onion. Add black beans and tomatoes, cook 5 min. Serve over brown rice.",
+    "tags": ["high-protein", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 4.20
+  },
+  {
+    "id": "r007",
+    "name": "Cottage Cheese Bowl with Banana",
+    "ingredients": [
+      {"name": "cottage cheese", "grams": 200},
+      {"name": "banana", "grams": 100},
+      {"name": "oats", "grams": 30}
+    ],
+    "instructions": "Add cottage cheese to bowl. Slice banana over top. Sprinkle with oats.",
+    "tags": ["high-protein", "breakfast", "quick", "vegetarian"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 1.90
+  },
+  {
+    "id": "r008",
+    "name": "Chicken and Sweet Potato Hash",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 120},
+      {"name": "sweet potato", "grams": 150},
+      {"name": "spinach", "grams": 60},
+      {"name": "onion", "grams": 40},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Dice sweet potato and roast at 400F 20 min. Dice chicken, cook in skillet. Add onion and spinach. Toss with sweet potato.",
+    "tags": ["high-protein", "gluten-free", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 3.80
+  },
+  {
+    "id": "r009",
+    "name": "Chicken Caesar Salad",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 150},
+      {"name": "spinach", "grams": 100},
+      {"name": "cheddar cheese", "grams": 20},
+      {"name": "olive oil", "grams": 15}
+    ],
+    "instructions": "Grill chicken, slice. Toss spinach with olive oil. Top with chicken and cheese.",
+    "tags": ["high-protein", "low-carb", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 4.00
+  },
+  {
+    "id": "r010",
+    "name": "Beef and Broccoli Stir-Fry",
+    "ingredients": [
+      {"name": "ground beef", "grams": 130},
+      {"name": "broccoli", "grams": 120},
+      {"name": "white rice", "grams": 100},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook rice. Stir-fry beef in oil, add garlic and broccoli, cook 5 min on high heat. Serve over rice.",
+    "tags": ["high-protein", "quick"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 4.50
+  },
+  {
+    "id": "r011",
+    "name": "Salmon Poke Bowl",
+    "ingredients": [
+      {"name": "salmon", "grams": 140},
+      {"name": "brown rice", "grams": 100},
+      {"name": "avocado", "grams": 60},
+      {"name": "spinach", "grams": 50},
+      {"name": "onion", "grams": 20}
+    ],
+    "instructions": "Cook rice. Dice salmon into cubes. Slice avocado. Arrange all over rice with onion and spinach.",
+    "tags": ["high-protein", "omega-3", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 7.00
+  },
+  {
+    "id": "r012",
+    "name": "Protein Smoothie",
+    "ingredients": [
+      {"name": "greek yogurt", "grams": 150},
+      {"name": "banana", "grams": 100},
+      {"name": "whole milk", "grams": 150},
+      {"name": "peanut butter", "grams": 30}
+    ],
+    "instructions": "Blend all ingredients until smooth. Serve immediately.",
+    "tags": ["high-protein", "breakfast", "quick", "snack", "vegetarian"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 2.50
+  },
+  {
+    "id": "r013",
+    "name": "Egg Fried Rice",
+    "ingredients": [
+      {"name": "eggs", "grams": 120},
+      {"name": "white rice", "grams": 150},
+      {"name": "broccoli", "grams": 80},
+      {"name": "onion", "grams": 40},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook rice day before (cold rice works better). Heat oil, scramble eggs, add rice, broccoli, and onion. Stir-fry on high heat 5 min.",
+    "tags": ["budget", "vegetarian", "quick"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 1.60
+  },
+  {
+    "id": "r014",
+    "name": "Slow Cooker Chicken and Rice",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 200},
+      {"name": "brown rice", "grams": 120},
+      {"name": "broccoli", "grams": 100},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 8}
+    ],
+    "instructions": "Place chicken, rice, and garlic in slow cooker with 2 cups water. Cook on low 6 hours. Add broccoli last 30 min.",
+    "tags": ["high-protein", "meal-prep", "gluten-free"],
+    "servings": 2,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 4.00
+  },
+  {
+    "id": "r015",
+    "name": "Bacon Egg Avocado Bowl",
+    "ingredients": [
+      {"name": "eggs", "grams": 150},
+      {"name": "avocado", "grams": 80},
+      {"name": "spinach", "grams": 60},
+      {"name": "tomato", "grams": 60}
+    ],
+    "instructions": "Fry eggs. Halve avocado. Arrange with spinach and tomato in a bowl.",
+    "tags": ["keto", "low-carb", "breakfast", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 3.20
+  },
+  {
+    "id": "r016",
+    "name": "Bunless Turkey Burger",
+    "ingredients": [
+      {"name": "ground beef", "grams": 150},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 60},
+      {"name": "onion", "grams": 30},
+      {"name": "cheddar cheese", "grams": 20}
+    ],
+    "instructions": "Form patty, season with salt and pepper. Grill 4 min per side. Serve wrapped in spinach leaves with tomato and onion.",
+    "tags": ["keto", "low-carb", "high-protein", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 4.50
+  },
+  {
+    "id": "r017",
+    "name": "Cauliflower Fried Rice (Low-Carb)",
+    "ingredients": [
+      {"name": "eggs", "grams": 120},
+      {"name": "broccoli", "grams": 200},
+      {"name": "garlic", "grams": 10},
+      {"name": "onion", "grams": 50},
+      {"name": "olive oil", "grams": 15}
+    ],
+    "instructions": "Pulse broccoli in food processor to rice-sized pieces. Stir-fry with garlic and onion in oil. Push to side, scramble eggs, mix together.",
+    "tags": ["keto", "low-carb", "vegetarian", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 2.80
+  },
+  {
+    "id": "r018",
+    "name": "Avocado Tuna Stuffed Tomato",
+    "ingredients": [
+      {"name": "tuna", "grams": 120},
+      {"name": "avocado", "grams": 80},
+      {"name": "tomato", "grams": 120},
+      {"name": "onion", "grams": 20}
+    ],
+    "instructions": "Hollow tomato halves. Mix tuna and avocado with diced onion. Fill tomatoes.",
+    "tags": ["keto", "low-carb", "high-protein", "gluten-free", "quick"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 3.80
+  },
+  {
+    "id": "r019",
+    "name": "Steak with Sweet Potato",
+    "ingredients": [
+      {"name": "ground beef", "grams": 180},
+      {"name": "sweet potato", "grams": 160},
+      {"name": "broccoli", "grams": 100},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Roast sweet potato at 400F 25 min. Cook beef patty in skillet. Steam broccoli. Serve together.",
+    "tags": ["high-protein", "gluten-free", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 5.20
+  },
+  {
+    "id": "r020",
+    "name": "Pasta with Meat Sauce",
+    "ingredients": [
+      {"name": "pasta", "grams": 120},
+      {"name": "ground beef", "grams": 100},
+      {"name": "tomato", "grams": 100},
+      {"name": "garlic", "grams": 10},
+      {"name": "onion", "grams": 50},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Boil pasta. Brown beef with garlic and onion. Add crushed tomatoes, simmer 15 min. Serve over pasta.",
+    "tags": ["balanced", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 3.80
+  },
+  {
+    "id": "r021",
+    "name": "Lentil Soup",
+    "ingredients": [
+      {"name": "lentils", "grams": 150},
+      {"name": "tomato", "grams": 100},
+      {"name": "onion", "grams": 60},
+      {"name": "garlic", "grams": 10},
+      {"name": "spinach", "grams": 50},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Sauté onion and garlic. Add lentils and 3 cups water. Simmer 25 min. Add tomatoes and spinach, cook 5 more min.",
+    "tags": ["vegetarian", "vegan", "high-protein", "budget"],
+    "servings": 2,
+    "prep_time_min": 35,
+    "estimated_cost_usd": 1.80
+  },
+  {
+    "id": "r022",
+    "name": "Black Bean Tacos (No Shell)",
+    "ingredients": [
+      {"name": "black beans", "grams": 150},
+      {"name": "tomato", "grams": 80},
+      {"name": "onion", "grams": 40},
+      {"name": "spinach", "grams": 60},
+      {"name": "cheddar cheese", "grams": 25}
+    ],
+    "instructions": "Warm black beans in pan. Build taco bowls with spinach as base, then beans, tomato, onion, and cheese.",
+    "tags": ["vegetarian", "budget", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 2.00
+  },
+  {
+    "id": "r023",
+    "name": "Tofu Stir-Fry with Brown Rice",
+    "ingredients": [
+      {"name": "tofu", "grams": 180},
+      {"name": "brown rice", "grams": 100},
+      {"name": "broccoli", "grams": 100},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 12}
+    ],
+    "instructions": "Press tofu dry, cube. Pan-fry until golden. Cook rice. Stir-fry broccoli and garlic, add tofu. Serve over rice.",
+    "tags": ["vegetarian", "vegan", "high-protein", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 3.00
+  },
+  {
+    "id": "r024",
+    "name": "Chickpea Curry",
+    "ingredients": [
+      {"name": "chickpeas", "grams": 180},
+      {"name": "tomato", "grams": 120},
+      {"name": "onion", "grams": 60},
+      {"name": "garlic", "grams": 10},
+      {"name": "white rice", "grams": 100},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Sauté onion and garlic. Add tomatoes and chickpeas. Simmer 20 min with curry spices. Serve over rice.",
+    "tags": ["vegetarian", "vegan", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 2.50
+  },
+  {
+    "id": "r025",
+    "name": "Spinach and Egg Scramble",
+    "ingredients": [
+      {"name": "eggs", "grams": 150},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 60},
+      {"name": "cheddar cheese", "grams": 20},
+      {"name": "olive oil", "grams": 5}
+    ],
+    "instructions": "Beat eggs. Wilt spinach in pan. Add eggs and scramble on medium heat. Top with tomato and cheese.",
+    "tags": ["vegetarian", "breakfast", "quick", "gluten-free", "high-protein"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 2.00
+  },
+  {
+    "id": "r026",
+    "name": "Rice and Beans",
+    "ingredients": [
+      {"name": "white rice", "grams": 130},
+      {"name": "black beans", "grams": 150},
+      {"name": "onion", "grams": 50},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 8}
+    ],
+    "instructions": "Cook rice. Sauté onion and garlic. Add beans, season with cumin and salt. Serve over rice.",
+    "tags": ["vegetarian", "vegan", "budget", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 1.40
+  },
+  {
+    "id": "r027",
+    "name": "Pasta Primavera",
+    "ingredients": [
+      {"name": "pasta", "grams": 100},
+      {"name": "broccoli", "grams": 80},
+      {"name": "spinach", "grams": 50},
+      {"name": "tomato", "grams": 80},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 12}
+    ],
+    "instructions": "Boil pasta. Sauté garlic, add all vegetables, cook 5 min. Toss with pasta and olive oil.",
+    "tags": ["vegetarian", "budget"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 2.20
+  },
+  {
+    "id": "r028",
+    "name": "Overnight Oats",
+    "ingredients": [
+      {"name": "oats", "grams": 80},
+      {"name": "whole milk", "grams": 200},
+      {"name": "banana", "grams": 80},
+      {"name": "peanut butter", "grams": 20}
+    ],
+    "instructions": "Combine oats and milk in jar. Refrigerate overnight. Top with sliced banana and peanut butter in the morning.",
+    "tags": ["vegetarian", "breakfast", "budget", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 1.80
+  },
+  {
+    "id": "r029",
+    "name": "Hummus and Veggie Plate",
+    "ingredients": [
+      {"name": "chickpeas", "grams": 100},
+      {"name": "broccoli", "grams": 80},
+      {"name": "tomato", "grams": 80},
+      {"name": "spinach", "grams": 40},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Blend chickpeas with olive oil, lemon juice, and garlic to make hummus. Serve with raw broccoli, tomatoes, and spinach.",
+    "tags": ["vegetarian", "vegan", "snack", "budget", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 1.50
+  },
+  {
+    "id": "r030",
+    "name": "Peanut Butter Banana Toast",
+    "ingredients": [
+      {"name": "whole wheat bread", "grams": 60},
+      {"name": "peanut butter", "grams": 30},
+      {"name": "banana", "grams": 100}
+    ],
+    "instructions": "Toast bread. Spread peanut butter. Top with sliced banana.",
+    "tags": ["vegetarian", "breakfast", "snack", "budget", "quick"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 0.90
+  },
+  {
+    "id": "r031",
+    "name": "Sheet Pan Chicken Thighs and Veggies",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 200},
+      {"name": "sweet potato", "grams": 150},
+      {"name": "broccoli", "grams": 100},
+      {"name": "onion", "grams": 60},
+      {"name": "olive oil", "grams": 15}
+    ],
+    "instructions": "Chop all vegetables. Toss with olive oil and seasonings. Arrange on sheet pan with chicken. Roast at 425F 25 min.",
+    "tags": ["high-protein", "meal-prep", "gluten-free"],
+    "servings": 2,
+    "prep_time_min": 35,
+    "estimated_cost_usd": 3.80
+  },
+  {
+    "id": "r032",
+    "name": "Slow Cooker Chicken Chili",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 200},
+      {"name": "black beans", "grams": 150},
+      {"name": "tomato", "grams": 150},
+      {"name": "onion", "grams": 80},
+      {"name": "garlic", "grams": 10}
+    ],
+    "instructions": "Place all ingredients in slow cooker. Cook on low 6-8 hours. Shred chicken with forks before serving.",
+    "tags": ["high-protein", "meal-prep", "gluten-free", "budget"],
+    "servings": 3,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 3.20
+  },
+  {
+    "id": "r033",
+    "name": "Quinoa Power Bowl",
+    "ingredients": [
+      {"name": "quinoa", "grams": 100},
+      {"name": "chicken breast", "grams": 120},
+      {"name": "spinach", "grams": 80},
+      {"name": "avocado", "grams": 60},
+      {"name": "tomato", "grams": 60}
+    ],
+    "instructions": "Cook quinoa. Grill chicken, slice. Arrange quinoa base with chicken, spinach, avocado, and tomato.",
+    "tags": ["high-protein", "gluten-free", "balanced"],
+    "servings": 1,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 5.00
+  },
+  {
+    "id": "r034",
+    "name": "Oatmeal with Banana and Peanut Butter",
+    "ingredients": [
+      {"name": "oats", "grams": 80},
+      {"name": "whole milk", "grams": 200},
+      {"name": "banana", "grams": 100},
+      {"name": "peanut butter", "grams": 25}
+    ],
+    "instructions": "Cook oats in milk 5 min. Top with sliced banana and peanut butter.",
+    "tags": ["vegetarian", "breakfast", "budget", "quick"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 1.60
+  },
+  {
+    "id": "r035",
+    "name": "Tuna Nicoise Salad",
+    "ingredients": [
+      {"name": "tuna", "grams": 120},
+      {"name": "eggs", "grams": 100},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 80},
+      {"name": "olive oil", "grams": 12}
+    ],
+    "instructions": "Hard-boil eggs, slice. Arrange spinach in bowl. Top with tuna, egg slices, tomato. Drizzle with olive oil.",
+    "tags": ["high-protein", "low-carb", "gluten-free", "quick"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 3.50
+  },
+  {
+    "id": "r036",
+    "name": "Chicken Burrito Bowl",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 150},
+      {"name": "white rice", "grams": 100},
+      {"name": "black beans", "grams": 80},
+      {"name": "avocado", "grams": 60},
+      {"name": "tomato", "grams": 60},
+      {"name": "onion", "grams": 30}
+    ],
+    "instructions": "Cook rice. Season and grill chicken. Assemble bowl: rice, beans, chicken, avocado, tomato, onion.",
+    "tags": ["high-protein", "balanced", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 4.80
+  },
+  {
+    "id": "r037",
+    "name": "Cottage Cheese Snack Bowl",
+    "ingredients": [
+      {"name": "cottage cheese", "grams": 200},
+      {"name": "apple", "grams": 100},
+      {"name": "peanut butter", "grams": 20}
+    ],
+    "instructions": "Spoon cottage cheese into bowl. Dice apple on top. Dollop peanut butter.",
+    "tags": ["high-protein", "snack", "quick", "vegetarian"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 2.00
+  },
+  {
+    "id": "r038",
+    "name": "Lentil and Spinach Stew",
+    "ingredients": [
+      {"name": "lentils", "grams": 150},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 100},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook lentils 20 min. Sauté garlic, add tomatoes and spinach. Combine with lentils and simmer 5 min.",
+    "tags": ["vegetarian", "vegan", "high-protein", "gluten-free", "budget"],
+    "servings": 2,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 1.50
+  },
+  {
+    "id": "r039",
+    "name": "Salmon and Avocado Lettuce Wraps",
+    "ingredients": [
+      {"name": "salmon", "grams": 130},
+      {"name": "avocado", "grams": 80},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 60}
+    ],
+    "instructions": "Pan-sear salmon. Flake into pieces. Use spinach leaves as wraps. Fill with salmon, avocado, and tomato.",
+    "tags": ["keto", "low-carb", "high-protein", "gluten-free", "omega-3"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 6.00
+  },
+  {
+    "id": "r040",
+    "name": "Egg Muffins (Meal Prep)",
+    "ingredients": [
+      {"name": "eggs", "grams": 240},
+      {"name": "spinach", "grams": 60},
+      {"name": "tomato", "grams": 60},
+      {"name": "cheddar cheese", "grams": 30},
+      {"name": "onion", "grams": 40}
+    ],
+    "instructions": "Whisk eggs. Chop all vegetables. Mix together. Pour into muffin tin, fill 12 cups. Bake at 350F 20 min.",
+    "tags": ["high-protein", "meal-prep", "breakfast", "low-carb", "gluten-free"],
+    "servings": 4,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 2.00
+  },
+  {
+    "id": "r041",
+    "name": "Ground Beef and Vegetable Bowl",
+    "ingredients": [
+      {"name": "ground beef", "grams": 150},
+      {"name": "broccoli", "grams": 120},
+      {"name": "sweet potato", "grams": 120},
+      {"name": "onion", "grams": 40},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Roast sweet potato 20 min. Cook beef with onion. Steam broccoli. Assemble in bowl.",
+    "tags": ["high-protein", "gluten-free", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 4.80
+  },
+  {
+    "id": "r042",
+    "name": "Tofu Scramble",
+    "ingredients": [
+      {"name": "tofu", "grams": 180},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 60},
+      {"name": "onion", "grams": 40},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Crumble tofu in pan. Sauté with onion and garlic. Add spinach and tomato. Cook until heated through.",
+    "tags": ["vegetarian", "vegan", "breakfast", "high-protein", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 2.50
+  },
+  {
+    "id": "r043",
+    "name": "Greek Yogurt with Apple and Peanut Butter",
+    "ingredients": [
+      {"name": "greek yogurt", "grams": 200},
+      {"name": "apple", "grams": 120},
+      {"name": "peanut butter", "grams": 20}
+    ],
+    "instructions": "Spoon yogurt into bowl. Dice apple on top. Add peanut butter.",
+    "tags": ["high-protein", "snack", "breakfast", "quick", "vegetarian", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 2.30
+  },
+  {
+    "id": "r044",
+    "name": "Black Bean and Egg Breakfast Bowl",
+    "ingredients": [
+      {"name": "eggs", "grams": 120},
+      {"name": "black beans", "grams": 100},
+      {"name": "avocado", "grams": 60},
+      {"name": "tomato", "grams": 60},
+      {"name": "olive oil", "grams": 5}
+    ],
+    "instructions": "Warm black beans. Fry eggs in olive oil. Slice avocado. Assemble bowl: beans, eggs, avocado, tomato.",
+    "tags": ["vegetarian", "breakfast", "high-protein", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 2.80
+  },
+  {
+    "id": "r045",
+    "name": "Tuna Pasta Salad",
+    "ingredients": [
+      {"name": "tuna", "grams": 120},
+      {"name": "pasta", "grams": 100},
+      {"name": "tomato", "grams": 80},
+      {"name": "spinach", "grams": 50},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook and cool pasta. Mix with tuna, tomato, and spinach. Dress with olive oil.",
+    "tags": ["high-protein", "budget", "quick"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 2.80
+  },
+  {
+    "id": "r046",
+    "name": "Chickpea and Spinach Sauté",
+    "ingredients": [
+      {"name": "chickpeas", "grams": 150},
+      {"name": "spinach", "grams": 100},
+      {"name": "garlic", "grams": 10},
+      {"name": "tomato", "grams": 80},
+      {"name": "olive oil", "grams": 12}
+    ],
+    "instructions": "Sauté garlic in oil. Add chickpeas and cook 5 min until lightly browned. Add spinach and tomatoes, cook 3 more min.",
+    "tags": ["vegetarian", "vegan", "gluten-free", "budget", "quick"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 2.20
+  },
+  {
+    "id": "r047",
+    "name": "Chicken Soup with Rice",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 150},
+      {"name": "white rice", "grams": 80},
+      {"name": "onion", "grams": 60},
+      {"name": "garlic", "grams": 10},
+      {"name": "spinach", "grams": 60}
+    ],
+    "instructions": "Boil chicken in 4 cups water with garlic and onion 20 min. Shred chicken. Add rice and spinach, cook 15 more min.",
+    "tags": ["high-protein", "gluten-free", "budget"],
+    "servings": 2,
+    "prep_time_min": 40,
+    "estimated_cost_usd": 2.50
+  },
+  {
+    "id": "r048",
+    "name": "Avocado Egg Toast",
+    "ingredients": [
+      {"name": "eggs", "grams": 100},
+      {"name": "avocado", "grams": 80},
+      {"name": "whole wheat bread", "grams": 60},
+      {"name": "tomato", "grams": 50}
+    ],
+    "instructions": "Toast bread. Mash avocado on toast. Fry or poach eggs. Place on top with sliced tomato.",
+    "tags": ["vegetarian", "breakfast", "balanced"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 2.50
+  },
+  {
+    "id": "r049",
+    "name": "Salmon Quinoa Salad",
+    "ingredients": [
+      {"name": "salmon", "grams": 120},
+      {"name": "quinoa", "grams": 80},
+      {"name": "spinach", "grams": 80},
+      {"name": "avocado", "grams": 60},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook quinoa, let cool. Pan-sear salmon, flake. Toss quinoa with spinach, avocado, and olive oil. Top with salmon.",
+    "tags": ["high-protein", "omega-3", "gluten-free", "balanced"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 7.00
+  },
+  {
+    "id": "r050",
+    "name": "Beef Taco Salad (No Shell)",
+    "ingredients": [
+      {"name": "ground beef", "grams": 130},
+      {"name": "black beans", "grams": 80},
+      {"name": "spinach", "grams": 80},
+      {"name": "cheddar cheese", "grams": 25},
+      {"name": "tomato", "grams": 60},
+      {"name": "avocado", "grams": 50}
+    ],
+    "instructions": "Cook beef with taco seasoning. Layer spinach with beef, beans, cheese, tomato, and avocado.",
+    "tags": ["high-protein", "low-carb", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 5.00
+  },
+  {
+    "id": "r051",
+    "name": "Cheese Omelette",
+    "ingredients": [
+      {"name": "eggs", "grams": 150},
+      {"name": "cheddar cheese", "grams": 30},
+      {"name": "spinach", "grams": 50},
+      {"name": "onion", "grams": 30},
+      {"name": "olive oil", "grams": 5}
+    ],
+    "instructions": "Beat eggs. Cook omelette in olive oil. Add spinach and onion, fold. Top with cheese.",
+    "tags": ["high-protein", "breakfast", "quick", "gluten-free", "vegetarian"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 2.20
+  },
+  {
+    "id": "r052",
+    "name": "Peanut Butter Protein Bowl",
+    "ingredients": [
+      {"name": "greek yogurt", "grams": 150},
+      {"name": "peanut butter", "grams": 30},
+      {"name": "oats", "grams": 50},
+      {"name": "banana", "grams": 80}
+    ],
+    "instructions": "Mix Greek yogurt with peanut butter. Top with oats and sliced banana.",
+    "tags": ["high-protein", "breakfast", "snack", "vegetarian", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 2.60
+  },
+  {
+    "id": "r053",
+    "name": "Veggie Rice Bowl",
+    "ingredients": [
+      {"name": "brown rice", "grams": 120},
+      {"name": "broccoli", "grams": 100},
+      {"name": "spinach", "grams": 60},
+      {"name": "eggs", "grams": 100},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook rice. Steam broccoli. Pan-fry eggs. Sauté spinach. Assemble bowl.",
+    "tags": ["vegetarian", "balanced", "budget", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 2.00
+  },
+  {
+    "id": "r054",
+    "name": "Chicken Avocado Salad",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 150},
+      {"name": "avocado", "grams": 80},
+      {"name": "spinach", "grams": 100},
+      {"name": "tomato", "grams": 60},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Grill chicken, slice. Toss spinach with olive oil. Top with chicken, avocado, and tomato.",
+    "tags": ["high-protein", "keto", "low-carb", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 4.80
+  },
+  {
+    "id": "r055",
+    "name": "Black Bean Soup",
+    "ingredients": [
+      {"name": "black beans", "grams": 200},
+      {"name": "tomato", "grams": 100},
+      {"name": "onion", "grams": 80},
+      {"name": "garlic", "grams": 15},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Sauté onion and garlic. Add black beans and tomatoes with 2 cups water. Blend half the soup for creaminess. Simmer 15 min.",
+    "tags": ["vegetarian", "vegan", "budget", "gluten-free"],
+    "servings": 2,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 1.60
+  },
+  {
+    "id": "r056",
+    "name": "Tuna Rice Bowl",
+    "ingredients": [
+      {"name": "tuna", "grams": 120},
+      {"name": "white rice", "grams": 120},
+      {"name": "avocado", "grams": 60},
+      {"name": "spinach", "grams": 50}
+    ],
+    "instructions": "Cook rice. Drain tuna. Slice avocado. Assemble bowl: rice, tuna, avocado, spinach.",
+    "tags": ["high-protein", "quick", "budget", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 3.20
+  },
+  {
+    "id": "r057",
+    "name": "Scrambled Eggs with Toast",
+    "ingredients": [
+      {"name": "eggs", "grams": 150},
+      {"name": "whole wheat bread", "grams": 60},
+      {"name": "spinach", "grams": 40},
+      {"name": "olive oil", "grams": 5}
+    ],
+    "instructions": "Scramble eggs in olive oil on low heat. Toast bread. Wilt spinach in same pan. Serve together.",
+    "tags": ["vegetarian", "breakfast", "quick", "budget"],
+    "servings": 1,
+    "prep_time_min": 10,
+    "estimated_cost_usd": 1.60
+  },
+  {
+    "id": "r058",
+    "name": "Beef and Sweet Potato Bowl",
+    "ingredients": [
+      {"name": "ground beef", "grams": 150},
+      {"name": "sweet potato", "grams": 180},
+      {"name": "onion", "grams": 50},
+      {"name": "spinach", "grams": 60},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Roast sweet potato cubes at 400F 20 min. Brown beef with onion. Wilt spinach. Combine in bowl.",
+    "tags": ["high-protein", "gluten-free", "balanced"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 4.50
+  },
+  {
+    "id": "r059",
+    "name": "Quinoa and Black Bean Salad",
+    "ingredients": [
+      {"name": "quinoa", "grams": 100},
+      {"name": "black beans", "grams": 120},
+      {"name": "tomato", "grams": 80},
+      {"name": "onion", "grams": 40},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook quinoa, let cool. Mix with black beans, tomato, and onion. Dress with olive oil.",
+    "tags": ["vegetarian", "vegan", "gluten-free", "budget", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 2.80
+  },
+  {
+    "id": "r060",
+    "name": "Milk and Banana Protein Shake",
+    "ingredients": [
+      {"name": "whole milk", "grams": 250},
+      {"name": "banana", "grams": 100},
+      {"name": "peanut butter", "grams": 30},
+      {"name": "oats", "grams": 40}
+    ],
+    "instructions": "Blend all ingredients until smooth.",
+    "tags": ["breakfast", "snack", "budget", "vegetarian", "quick"],
+    "servings": 1,
+    "prep_time_min": 5,
+    "estimated_cost_usd": 1.80
+  },
+  {
+    "id": "r061",
+    "name": "Spicy Chicken and Rice",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 160},
+      {"name": "white rice", "grams": 120},
+      {"name": "broccoli", "grams": 80},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Marinate chicken with garlic and chili. Grill or pan-fry. Cook rice. Steam broccoli. Serve.",
+    "tags": ["high-protein", "gluten-free", "budget"],
+    "servings": 1,
+    "prep_time_min": 25,
+    "estimated_cost_usd": 3.20
+  },
+  {
+    "id": "r062",
+    "name": "Tofu and Vegetable Soup",
+    "ingredients": [
+      {"name": "tofu", "grams": 150},
+      {"name": "spinach", "grams": 80},
+      {"name": "broccoli", "grams": 80},
+      {"name": "garlic", "grams": 10},
+      {"name": "onion", "grams": 50}
+    ],
+    "instructions": "Cube tofu. Bring 3 cups water to boil with garlic and onion. Add broccoli and tofu. Simmer 10 min. Add spinach last minute.",
+    "tags": ["vegetarian", "vegan", "low-carb", "gluten-free"],
+    "servings": 1,
+    "prep_time_min": 20,
+    "estimated_cost_usd": 2.50
+  },
+  {
+    "id": "r063",
+    "name": "Cheddar Egg and Bean Burrito",
+    "ingredients": [
+      {"name": "eggs", "grams": 120},
+      {"name": "black beans", "grams": 100},
+      {"name": "cheddar cheese", "grams": 25},
+      {"name": "whole wheat bread", "grams": 70},
+      {"name": "spinach", "grams": 40}
+    ],
+    "instructions": "Scramble eggs. Warm beans. Assemble with bread: eggs, beans, cheese, spinach. Fold like a burrito.",
+    "tags": ["vegetarian", "breakfast", "budget", "high-protein"],
+    "servings": 1,
+    "prep_time_min": 15,
+    "estimated_cost_usd": 2.20
+  },
+  {
+    "id": "r064",
+    "name": "Brown Rice Buddha Bowl",
+    "ingredients": [
+      {"name": "brown rice", "grams": 100},
+      {"name": "chickpeas", "grams": 100},
+      {"name": "avocado", "grams": 60},
+      {"name": "spinach", "grams": 80},
+      {"name": "tomato", "grams": 60},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Cook rice. Roast chickpeas at 400F 20 min. Assemble bowl with all ingredients. Drizzle with olive oil.",
+    "tags": ["vegetarian", "vegan", "gluten-free", "balanced"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 3.00
+  },
+  {
+    "id": "r065",
+    "name": "Chicken Broccoli Cheddar Bake",
+    "ingredients": [
+      {"name": "chicken breast", "grams": 180},
+      {"name": "broccoli", "grams": 150},
+      {"name": "cheddar cheese", "grams": 40},
+      {"name": "garlic", "grams": 10},
+      {"name": "olive oil", "grams": 10}
+    ],
+    "instructions": "Lay chicken and broccoli in baking dish. Drizzle with olive oil, garlic. Top with cheese. Bake at 375F 25 min.",
+    "tags": ["high-protein", "low-carb", "gluten-free", "meal-prep"],
+    "servings": 1,
+    "prep_time_min": 30,
+    "estimated_cost_usd": 4.50
+  }
+]
