@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Secrets
+.env
+
+# Generated at runtime — not source code
+chroma_db/
+eval_log.jsonl
+
+# Temp / debug scripts
+list_models.py
