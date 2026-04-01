@@ -1,9 +1,11 @@
 """
-Google Gemini integration for meal plan generation.
-Uses the new google-genai SDK (v1 API).
+LLM integration for meal plan generation.
+Supports Groq (free tier, default) and Google Gemini.
+Set LLM_PROVIDER="gemini" in config or pass provider= to switch.
 """
 from google import genai
 from google.genai import types
+from groq import Groq
 
 from src.config import GOOGLE_API_KEY, GEMINI_MODEL
 from src.reranker import UserConstraints, RankedResult
@@ -121,3 +123,61 @@ def generate_baseline_plan(
         ),
     )
     return response.text
+
+
+# ── Groq variants (free tier, no billing required) ────────────────────────────
+
+GROQ_MODEL = "llama-3.3-70b-versatile"
+
+
+def generate_meal_plan_groq(
+    constraints: UserConstraints,
+    ranked_recipes: list[RankedResult],
+    api_key: str = "",
+    model_name: str = GROQ_MODEL,
+) -> str:
+    """Groq/Llama version of generate_meal_plan."""
+    client = Groq(api_key=api_key)
+    prompt = build_meal_plan_prompt(constraints, ranked_recipes)
+    response = client.chat.completions.create(
+        model=model_name,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user",   "content": prompt},
+        ],
+        temperature=0.4,
+        max_tokens=1500,
+    )
+    return response.choices[0].message.content
+
+
+def generate_baseline_plan_groq(
+    constraints: UserConstraints,
+    api_key: str = "",
+    model_name: str = GROQ_MODEL,
+) -> str:
+    """Groq/Llama version of generate_baseline_plan."""
+    client = Groq(api_key=api_key)
+    prompt = (
+        f"USER CONSTRAINTS:\n"
+        f"Macro targets per day:\n"
+        f"  Calories: {constraints.calories} kcal\n"
+        f"  Protein:  {constraints.protein_g} g\n"
+        f"  Carbs:    {constraints.carbs_g} g\n"
+        f"  Fat:      {constraints.fat_g} g\n"
+        f"Daily budget: ${constraints.budget_usd:.2f}\n"
+        f"Available ingredients: {', '.join(constraints.available_ingredients) or 'any'}\n"
+        f"Dietary requirements: {', '.join(constraints.dietary_tags) or 'none'}\n\n"
+        f"Build a complete daily meal plan (breakfast, lunch, dinner, snack) from your own knowledge.\n"
+        f"Calculate total daily macros and compare to targets."
+    )
+    response = client.chat.completions.create(
+        model=model_name,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user",   "content": prompt},
+        ],
+        temperature=0.4,
+        max_tokens=1500,
+    )
+    return response.choices[0].message.content
