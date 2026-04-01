@@ -10,3 +10,4 @@ build/
 venv/
 .venv/
 data/chroma_db/
+data/RecipeNLG_dataset.csv
