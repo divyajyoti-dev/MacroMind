@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>MacroMind — Architecture</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#030712;color:#f1f5f9;font-family:system-ui,sans-serif;padding:32px 20px;min-height:100vh}
+h1{font-size:26px;font-weight:800;background:linear-gradient(90deg,#60a5fa,#a78bfa,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0}
+.header{text-align:center;margin-bottom:28px}
+.subtitle{color:#6b7280;font-size:12px;margin-top:6px}
+
+/* Variant pills */
+.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:32px}
+.pill{padding:10px 16px;border-radius:12px;cursor:pointer;border:1.5px solid #374151;background:#111827;text-align:left;min-width:128px;transition:all .25s ease;font-family:inherit}
+.pill:hover{border-color:#6b7280}
+.pill.active{transform:scale(1.06)}
+.pill-id{font-size:10px;font-weight:700;font-family:monospace;margin-bottom:2px}
+.pill-label{font-size:12px;font-weight:600;color:#e2e8f0}
+.pill-sub{font-size:9px;color:#6b7280;margin-top:2px}
+.pill-warn{font-size:9px;color:#4ade80;margin-top:3px;font-family:monospace}
+
+/* Layout */
+.diagram{max-width:860px;margin:0 auto}
+.layer-label{text-align:center;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#6b7280;font-family:monospace;margin-bottom:8px}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:4px}
+.center{display:flex;justify-content:center;margin-bottom:4px}
+
+/* Cards */
+.card{border-radius:12px;padding:10px 14px;border:1px solid #374151;background:#0f172a;transition:all .35s ease;cursor:default;position:relative;min-width:0}
+.card.active{background:var(--card-bg);border-color:var(--card-color);box-shadow:0 0 20px var(--card-glow)}
+.card.inactive{opacity:.22;filter:grayscale(.4)}
+.card.dashed{border-style:dashed}
+.card-inner{display:flex;align-items:center;gap:8px}
+.card-icon{font-size:18px;flex-shrink:0}
+.card-title{font-size:12px;font-weight:600;color:#f1f5f9}
+.card-sub{font-size:10px;color:#94a3b8;margin-top:2px}
+.card-badge{margin-left:auto;font-size:9px;font-family:monospace;padding:2px 6px;border-radius:6px;white-space:nowrap;flex-shrink:0}
+.proposed-tag{position:absolute;top:-8px;right:-8px;font-size:9px;background:#1f2937;color:#9ca3af;padding:2px 6px;border-radius:99px;border:1px solid #374151;font-family:monospace}
+
+/* Big boxes */
+.bigbox{border-radius:14px;padding:16px 20px;border:1px solid #374151;background:#0f172a;transition:all .35s ease}
+.bigbox.active{border-color:var(--card-color);background:var(--card-bg);box-shadow:0 0 28px var(--card-glow)}
+.bigbox.inactive{opacity:.22}
+
+/* Arrow */
+.arrow-wrap{display:flex;justify-content:center;height:36px;margin:0}
+.arrow-wrap svg line{transition:stroke .35s ease}
+
+/* Reranker formula */
+.formula{font-size:11px;font-weight:600;color:#e2e8f0;margin-bottom:12px;font-family:monospace}
+.rr-grid{display:flex;flex-wrap:wrap;gap:10px}
+.rr-item{display:flex;gap:8px;flex:1;min-width:130px}
+.rr-icon{font-size:15px;margin-top:2px}
+.rr-name{font-size:11px;font-weight:600}
+.rr-desc{font-size:9px;color:#94a3b8}
+.rr-foot{margin-top:10px;font-size:9px;color:#6b7280;font-family:monospace}
+
+/* Eval */
+.eval-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.eval-chip{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:8px;background:#1f2937;border:1px solid #374151}
+.eval-chip-label{font-size:10px;font-weight:600;color:#cbd5e1}
+.eval-chip-sub{font-size:8px;color:#6b7280}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;font-size:10px;color:#94a3b8;margin-top:24px}
+.legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+/* Tooltip */
+.tip{position:relative}
+.tip .tipbox{display:none;position:absolute;z-index:99;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:270px;background:#111827;border:1px solid #4b5563;border-radius:10px;padding:10px 12px;font-size:11px;color:#d1d5db;box-shadow:0 20px 40px rgba(0,0,0,.7);pointer-events:none;line-height:1.6;white-space:normal}
+.tip .tipbox::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#4b5563}
+.tip:hover .tipbox{display:block}
+
+/* LLM cards */
+.llm-warn{font-size:9px;color:#fbbf2499;margin-top:4px;font-style:italic}
+.llm-note{font-size:9px;color:#94a3b8}
+
+@keyframes dash{to{stroke-dashoffset:-14}}
+.animated-dash{animation:dash 1.2s linear infinite}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px">
+    <span style="font-size:28px">🥗</span>
+    <h1>MacroMind</h1>
+  </div>
+  <p class="subtitle">Multimodal RAG-Based Meal Planning System · INFO 290 GenAI @ UC Berkeley</p>
+</div>
+
+<!-- Variant pills -->
+<div class="pills" id="pills"></div>
+
+<div class="diagram">
+
+  <!-- L1 User Input -->
+  <div class="layer-label">Layer 1 — User Input</div>
+  <div class="center">
+    <div class="tip bigbox inactive" id="box-input" data-layer="input" style="width:100%;max-width:620px;--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+      <span class="tipbox">User provides: calorie &amp; macro targets (protein/carbs/fat), optional budget, dietary restrictions (vegetarian, vegan, gluten-free), and available pantry ingredients via text input.</span>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:20px">🔥</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Calories</span><span style="font-size:9px;color:#94a3b8">kcal target</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:20px">💪</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Macros</span><span style="font-size:9px;color:#94a3b8">P / C / F (g)</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:20px">💰</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Budget</span><span style="font-size:9px;color:#94a3b8">optional $/day</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:20px">🥦</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Dietary Tags</span><span style="font-size:9px;color:#94a3b8">veg · GF · vegan</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:20px">🧺</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Pantry</span><span style="font-size:9px;color:#94a3b8">available ingredients</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" id="ah1p"/></marker></defs><line id="arr-input" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah1)"/></svg></div>
+
+  <!-- L2 -->
+  <div class="layer-label">Layer 2 — Input Processing</div>
+  <div class="row">
+    <div style="flex:1;min-width:180px;max-width:300px">
+      <div class="tip card inactive" data-layer="input" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">src/retriever.py → build_query_text(). Converts structured constraints into a natural-language query like "2000 calorie meal high protein 150g with chicken broccoli". Better for semantic search than raw JSON.</span>
+        <div class="card-inner"><span class="card-icon">🔧</span><div><div class="card-title">Query Builder</div><div class="card-sub">build_query_text() → NL query string</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">retriever.py</span></div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:180px;max-width:300px">
+      <div class="tip card dashed inactive" data-layer="vision" style="--card-color:#22c55e;--card-bg:#22c55e14;--card-glow:#22c55e22;position:relative">
+        <span class="tipbox">⚠️ Proposed (not yet implemented): fridge photo → ingredient list extraction via vision model. Would feed into constraint parser as available_ingredients.</span>
+        <span class="proposed-tag">proposed</span>
+        <div class="card-inner"><span class="card-icon">📷</span><div><div class="card-title">Vision Module</div><div class="card-sub">fridge photo → ingredient list</div></div><span class="card-badge" style="background:#22c55e33;color:#22c55e">V4 only</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" id="ah2p"/></marker></defs><line id="arr-data0" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah2)"/></svg></div>
+
+  <!-- L3 Data -->
+  <div class="layer-label">Layer 3 — Data Layer</div>
+  <div class="row">
+    <div style="flex:1;min-width:155px;max-width:280px">
+      <div class="tip card inactive" data-layer="data" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">src/data_pipeline.py → USDA FoodData Central API. Fetches per-100g macros for each ingredient. Cached in data/usda_cache/nutrition_cache.json.</span>
+        <div class="card-inner"><span class="card-icon">🔬</span><div><div class="card-title">USDA FoodData Central</div><div class="card-sub">Macros per 100g · cached JSON</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">API</span></div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:155px;max-width:280px">
+      <div class="tip card inactive" data-layer="data" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">data/recipes/sample_recipes.json — 65 hand-crafted recipes. Original proposal: RecipeNLG (2.2M recipes). Each recipe has id, name, ingredients [{name, grams}], tags, instructions, prep_time, cost.</span>
+        <div class="card-inner"><span class="card-icon">📋</span><div><div class="card-title">Recipe Corpus</div><div class="card-sub">65 recipes · ⚠ was 2.2M proposed</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">JSON</span></div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:155px;max-width:280px">
+      <div class="tip card inactive" data-layer="data" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">src/config.py → PRICE_PER_100G table. Hardcoded BLS CPI-based prices for ~30 ingredients. ⚠ Original proposal: Kroger Product API — not implemented.</span>
+        <div class="card-inner"><span class="card-icon">🏷️</span><div><div class="card-title">Price Table</div><div class="card-sub">Hardcoded BLS CPI · ⚠ was Kroger API</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">config.py</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z"/></marker></defs><line id="arr-data1" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah3)"/></svg></div>
+
+  <!-- Embedding -->
+  <div class="layer-label">Embedding &amp; Vector Store</div>
+  <div class="row">
+    <div style="flex:1;min-width:180px;max-width:320px">
+      <div class="tip card inactive" data-layer="data" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">src/recipe_processor.py → recipe_to_document() converts each recipe to prose, then SentenceTransformer('all-MiniLM-L6-v2') encodes to 384-dim vector. 22MB model, runs on CPU/MPS.</span>
+        <div class="card-inner"><span class="card-icon">🧬</span><div><div class="card-title">Sentence Transformer</div><div class="card-sub">all-MiniLM-L6-v2 · 384-dim · 22MB · local</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">embed</span></div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:180px;max-width:320px">
+      <div class="tip card inactive" data-layer="data" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">ChromaDB local persistent store. Collection: 'macromind_recipes'. Distance metric: cosine. Metadata per recipe: name, macros, cost, tags, ingredients (pipe-delimited), prep_time. ⚠ Original proposal used FAISS.</span>
+        <div class="card-inner"><span class="card-icon">🗄️</span><div><div class="card-title">ChromaDB</div><div class="card-sub">Cosine similarity · local · ⚠ was FAISS</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">vector DB</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z"/></marker></defs><line id="arr-retrieval0" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah4)"/></svg></div>
+
+  <!-- L4 Retrieval -->
+  <div class="layer-label">Layer 4 — Retrieval</div>
+  <div class="center">
+    <div style="width:100%;max-width:400px">
+      <div class="tip card inactive" data-layer="retrieval" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">src/retriever.py → semantic_search(). Encodes user query to 384-dim vector, queries ChromaDB for top-20 nearest recipes by cosine distance. Returns SearchResult[20] sorted ascending.</span>
+        <div class="card-inner"><span class="card-icon">🔍</span><div><div class="card-title">Semantic Search</div><div class="card-sub">Query embedding → cosine similarity → top-20 candidates</div></div><span class="card-badge" style="background:#3b82f633;color:#3b82f6">retriever.py</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z"/></marker></defs><line id="arr-variants" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah5)"/></svg></div>
+
+  <!-- L5 Variant cards -->
+  <div class="layer-label">Layer 5 — Experiment Variants</div>
+  <div class="row" id="variant-cards"></div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah6" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z"/></marker></defs><line id="arr-reranker" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah6)"/></svg></div>
+
+  <!-- L6 Reranker -->
+  <div class="layer-label">Layer 6 — Macro-Aware Reranker (V3 &amp; V4)</div>
+  <div class="center">
+    <div class="tip bigbox inactive" id="box-reranker" style="width:100%;max-width:680px;--card-color:#8b5cf6;--card-bg:#8b5cf614;--card-glow:#8b5cf622">
+      <span class="tipbox">src/reranker.py → rerank(). Multi-objective scoring with hard dietary violation penalty (−999). Uses difflib fuzzy matching for ingredient overlap. SearchResult[20] → RankedResult[5].</span>
+      <div class="formula">score = 1.0 − (0.5 × MAPE<sub>macros</sub> + 0.3 × budget_overshoot + 0.2 × waste_fraction)</div>
+      <div class="rr-grid">
+        <div class="rr-item"><span class="rr-icon">📊</span><div><div class="rr-name" style="color:#a78bfa">Macro MAPE</div><div class="rr-desc">MAPE across cal/P/C/F · w=0.50</div></div></div>
+        <div class="rr-item"><span class="rr-icon">💵</span><div><div class="rr-name" style="color:#fbbf24">Budget Overshoot</div><div class="rr-desc">fraction over per-meal limit · w=0.30</div></div></div>
+        <div class="rr-item"><span class="rr-icon">♻️</span><div><div class="rr-name" style="color:#4ade80">Ingredient Waste</div><div class="rr-desc">missing from pantry · w=0.20</div></div></div>
+        <div class="rr-item"><span class="rr-icon">🚫</span><div><div class="rr-name" style="color:#f87171">Dietary Violation</div><div class="rr-desc">hard −999 penalty · instant disqualify</div></div></div>
+      </div>
+      <div class="rr-foot">src/reranker.py · difflib fuzzy ingredient matching · SearchResult[20] → RankedResult[5]</div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah7" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z"/></marker></defs><line id="arr-llm" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah7)"/></svg></div>
+
+  <!-- L7 LLM -->
+  <div class="layer-label">Layer 7 — LLM Generation</div>
+  <div class="row">
+    <div style="flex:1;min-width:200px;max-width:360px">
+      <div class="tip card inactive" data-layer="llm" id="card-groq" style="--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+        <span class="tipbox">src/llm_generator.py → generate_meal_plan_groq(). Groq API with llama-3.3-70b-versatile, free tier, no billing required. Temperature 0.4, max_tokens 1500. ⚠ Original proposal: GPT-4o.</span>
+        <div class="card-inner"><span class="card-icon">⚡</span><div><div class="card-title">Groq · Llama 3.3 70B</div><div style="font-size:9px;color:#60a5fa;font-family:monospace;margin-top:2px">default · free tier · no billing</div><div class="llm-note">temp=0.4 · max_tokens=1500</div><div class="llm-warn">⚠ Original proposal: GPT-4o</div></div></div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:200px;max-width:360px">
+      <div class="tip card dashed inactive" data-layer="llm" style="--card-color:#6b7280;--card-bg:#6b728014;--card-glow:#6b728022">
+        <span class="tipbox">Alternative LLM: Gemini 2.0 Flash via google-genai SDK. Requires GOOGLE_API_KEY. Used in generate_meal_plan() and generate_baseline_plan().</span>
+        <div class="card-inner"><span class="card-icon">🤖</span><div><div class="card-title" style="color:#cbd5e1">Gemini 2.0 Flash</div><div style="font-size:9px;color:#6b7280;font-family:monospace;margin-top:2px">alternative · requires API key</div><div class="llm-note">generate_meal_plan() · generate_baseline_plan()</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow-wrap"><svg width="24" height="36" viewBox="0 0 24 36"><defs><marker id="ah8" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z"/></marker></defs><line id="arr-output" x1="12" y1="2" x2="12" y2="28" stroke="#374151" stroke-width="2" marker-end="url(#ah8)"/></svg></div>
+
+  <!-- L8 Output -->
+  <div class="layer-label">Layer 8 — Output (Streamlit UI · app.py)</div>
+  <div class="center">
+    <div class="tip bigbox inactive" id="box-output" style="width:100%;max-width:620px;--card-color:#3b82f6;--card-bg:#3b82f614;--card-glow:#3b82f622">
+      <span class="tipbox">Streamlit app.py renders: LLM-generated markdown meal plan (breakfast/lunch/dinner/snack), top-5 ranked recipe cards with macro breakdown, pipeline latency, and total retrieved candidates.</span>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:80px"><span style="font-size:22px">🍽️</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Meal Plan</span><span style="font-size:9px;color:#94a3b8;text-align:center">breakfast · lunch · dinner · snack</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:80px"><span style="font-size:22px">📈</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Macro Summary</span><span style="font-size:9px;color:#94a3b8;text-align:center">target vs. actual</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:80px"><span style="font-size:22px">🛒</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Shopping List</span><span style="font-size:9px;color:#94a3b8;text-align:center">missing ingredients</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:80px"><span style="font-size:22px">⚖️</span><span style="font-size:11px;font-weight:600;color:#e2e8f0">Trade-off Notes</span><span style="font-size:9px;color:#94a3b8;text-align:center">why each recipe</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Eval -->
+  <div style="margin-top:24px">
+    <div class="layer-label">Evaluation — src/evaluator.py · notebooks/divya_evaluation.ipynb</div>
+    <div class="tip" style="border-radius:12px;padding:12px 16px;border:1px solid #1f2937;background:#111827">
+      <span class="tipbox">src/evaluator.py. Metrics: macro MAPE per dimension, precision@k vs. ground-truth, total cost, within_budget, avg waste fraction, ROUGE-L score. Used in notebooks/divya_evaluation.ipynb.</span>
+      <div class="eval-grid">
+        <div class="eval-chip"><span style="font-size:13px">📊</span><div><div class="eval-chip-label">Macro MAPE</div><div class="eval-chip-sub">per-dimension %</div></div></div>
+        <div class="eval-chip"><span style="font-size:13px">🎯</span><div><div class="eval-chip-label">Precision@K</div><div class="eval-chip-sub">vs. ground truth</div></div></div>
+        <div class="eval-chip"><span style="font-size:13px">💰</span><div><div class="eval-chip-label">Budget Adherence</div><div class="eval-chip-sub">within_budget flag</div></div></div>
+        <div class="eval-chip"><span style="font-size:13px">♻️</span><div><div class="eval-chip-label">Waste Fraction</div><div class="eval-chip-sub">avg missing ingredients</div></div></div>
+        <div class="eval-chip"><span style="font-size:13px">📝</span><div><div class="eval-chip-label">ROUGE-L</div><div class="eval-chip-sub">plan vs. reference</div></div></div>
+        <div class="eval-chip"><span style="font-size:13px">⚡</span><div><div class="eval-chip-label">Latency</div><div class="eval-chip-sub">end-to-end seconds</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div style="display:flex;align-items:center;gap:6px"><div class="legend-dot" style="background:#3b82f640;border:1px solid #3b82f6"></div>Core pipeline</div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="legend-dot" style="background:#8b5cf640;border:1px solid #8b5cf6"></div>Reranker (V3+)</div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="legend-dot" style="background:#22c55e40;border:1.5px dashed #22c55e"></div>Vision (proposed)</div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="legend-dot" style="background:#37415140;border:1.5px dashed #374151"></div>Inactive / dimmed</div>
+    <div style="display:flex;align-items:center;gap:4px"><span style="color:#fbbf24">⚠</span>Differs from proposal</div>
+    <div style="display:flex;align-items:center;gap:4px"><span>💬</span>Hover for details</div>
+  </div>
+
+</div>
+
+<script>
+const VARIANTS = {
+  V1:{ label:"Baseline LLM", sub:"No retrieval", color:"#6b7280", ac:"#9ca3af", layers:["input","llm","output"] },
+  V2:{ label:"Standard RAG", sub:"Retrieve → Generate", color:"#3b82f6", ac:"#60a5fa", layers:["input","data","retrieval","llm","output"] },
+  V3:{ label:"RAG + Reranking", sub:"Retrieve → Score → Generate", color:"#8b5cf6", ac:"#a78bfa", layers:["input","data","retrieval","reranker","llm","output"] },
+  V4:{ label:"RAG + Vision", sub:"Proposed future variant", color:"#22c55e", ac:"#4ade80", layers:["input","vision","data","retrieval","reranker","llm","output"], proposed:true },
+};
+
+// Arrow map: arrow-id → layer it "belongs to"
+const ARROW_LAYERS = {
+  "arr-input":    "input",
+  "arr-data0":    "input",
+  "arr-data1":    "data",
+  "arr-retrieval0":"data",
+  "arr-variants": "retrieval",
+  "arr-reranker": "reranker",
+  "arr-llm":      "llm",
+  "arr-output":   "output",
+};
+
+// Box IDs → layer key (for bigboxes without data-layer)
+const BOX_LAYERS = {
+  "box-input":    "input",
+  "box-reranker": "reranker",
+  "box-output":   "output",
+};
+
+let selected = "V3";
+
+// Build pills
+const pillsEl = document.getElementById("pills");
+Object.entries(VARIANTS).forEach(([id,vv]) => {
+  const b = document.createElement("button");
+  b.className = "pill";
+  b.id = "pill-"+id;
+  b.innerHTML = `<div class="pill-id" id="pill-id-${id}">${id}${vv.proposed?'<span style="opacity:.6"> (proposed)</span>':''}</div><div class="pill-label">${vv.label}</div><div class="pill-sub">${vv.sub}</div>${vv.proposed?'<div class="pill-warn">⚠ not yet implemented</div>':''}`;
+  b.addEventListener("click", () => selectVariant(id));
+  pillsEl.appendChild(b);
+});
+
+// Build variant cards in L5
+const vcEl = document.getElementById("variant-cards");
+Object.entries(VARIANTS).forEach(([id,vv]) => {
+  const d = document.createElement("button");
+  d.className = "pill";
+  d.id = "vcard-"+id;
+  d.style.flex = "1";
+  d.style.minWidth = "128px";
+  d.style.maxWidth = "190px";
+  d.style.border = `1.5px ${vv.proposed?"dashed":"solid"} ${vv.color}`;
+  d.style.background = vv.color+"18";
+  d.style.transition = "all .3s ease";
+  d.innerHTML = `<div class="pill-id" style="color:${vv.ac}">${id}</div><div class="pill-label">${vv.label}</div><div class="pill-sub">${vv.sub}</div>${vv.proposed?'<div class="pill-warn">⚠ not yet implemented</div>':''}`;
+  d.addEventListener("click", () => selectVariant(id));
+  vcEl.appendChild(d);
+});
+
+function selectVariant(id) {
+  selected = id;
+  const vv = VARIANTS[id];
+  const layers = new Set(vv.layers);
+
+  // Update pills
+  Object.keys(VARIANTS).forEach(vid => {
+    const pill = document.getElementById("pill-"+vid);
+    const vdata = VARIANTS[vid];
+    if(vid === id) {
+      pill.style.borderColor = vdata.color;
+      pill.style.background = vdata.color+"22";
+      pill.style.boxShadow = `0 0 16px ${vdata.color}44`;
+      pill.style.transform = "scale(1.06)";
+      document.getElementById("pill-id-"+vid).style.color = vdata.ac;
+    } else {
+      pill.style.borderColor = "#374151";
+      pill.style.background = "#111827";
+      pill.style.boxShadow = "none";
+      pill.style.transform = "scale(1)";
+      document.getElementById("pill-id-"+vid).style.color = "#6b7280";
+    }
+    // variant cards
+    const vc = document.getElementById("vcard-"+vid);
+    vc.style.opacity = vid===id ? "1" : "0.35";
+    vc.style.transform = vid===id ? "scale(1.06)" : "scale(0.97)";
+    vc.style.boxShadow = vid===id ? `0 0 20px ${vdata.color}44` : "none";
+  });
+
+  // Update cards with data-layer
+  document.querySelectorAll("[data-layer]").forEach(el => {
+    const layer = el.getAttribute("data-layer");
+    const isActive = layers.has(layer);
+    if(isActive) {
+      el.classList.remove("inactive");
+      el.classList.add("active");
+      el.style.setProperty("--card-color", el.style.getPropertyValue("--card-color") || vv.color);
+    } else {
+      el.classList.remove("active");
+      el.classList.add("inactive");
+    }
+  });
+
+  // Update big boxes
+  Object.entries(BOX_LAYERS).forEach(([boxId, layer]) => {
+    const box = document.getElementById(boxId);
+    if(!box) return;
+    if(layers.has(layer)) {
+      box.classList.remove("inactive");
+      box.classList.add("active");
+    } else {
+      box.classList.remove("active");
+      box.classList.add("inactive");
+    }
+  });
+
+  // Update arrows
+  Object.entries(ARROW_LAYERS).forEach(([arrId, layer]) => {
+    const line = document.getElementById(arrId);
+    if(!line) return;
+    const isActive = layers.has(layer);
+    line.setAttribute("stroke", isActive ? vv.color : "#374151");
+    // update arrowhead fill
+    const marker = line.getAttribute("marker-end");
+    if(marker) {
+      const markerId = marker.replace("url(#","").replace(")","");
+      const path = document.querySelector(`#${markerId} path`);
+      if(path) path.setAttribute("fill", isActive ? vv.color : "#374151");
+    }
+    if(isActive) {
+      line.setAttribute("stroke-dasharray","4 3");
+      line.classList.add("animated-dash");
+    } else {
+      line.removeAttribute("stroke-dasharray");
+      line.classList.remove("animated-dash");
+    }
+  });
+}
+
+// Init
+selectVariant("V3");
+</script>
+</body>
+</html>
