@@ -1,0 +1,23 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'File edited — security-reviewer available via /agents security-reviewer'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "/Users/divyajyoti/dev/MacroMind/.claude/hooks/update-progress.sh",
+        "timeout": 10
+      }
+    ]
+  }
+}
