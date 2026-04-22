@@ -46,6 +46,31 @@ def _estimate_price(name: str) -> float:
     return 0.0
 
 
+_DATATYPE_WEIGHTS = {
+    "Foundation": 1.0,
+    "SR Legacy": 0.7,
+    "Survey (FNDDS)": 0.6,
+    "Branded": 0.3,
+}
+
+
+def _tokenize(text: str) -> set[str]:
+    import re
+    return set(re.sub(r"[^a-z0-9 ]", " ", text.lower()).split())
+
+
+def score_usda_match(query: str, candidate: dict) -> float:
+    query_tokens = _tokenize(query)
+    desc = candidate.get("description", "")
+    desc_tokens = _tokenize(desc)
+    overlap = len(query_tokens & desc_tokens) / max(len(query_tokens), 1)
+
+    data_type = candidate.get("dataType", "Branded")
+    type_weight = _DATATYPE_WEIGHTS.get(data_type, 0.3)
+
+    return 0.6 * overlap + 0.4 * type_weight
+
+
 def search_ingredient(query: str, api_key: str) -> list[dict]:
     params = {"query": query, "api_key": api_key, "pageSize": 5}
     resp = requests.get(USDA_SEARCH_URL, params=params, timeout=10)
@@ -73,7 +98,7 @@ def _fetch_one(name: str, api_key: str) -> NutritionFacts | None:
         candidates = search_ingredient(name, api_key)
         if not candidates:
             return None
-        best = candidates[0]
+        best = max(candidates, key=lambda c: score_usda_match(name, c))
         fdc_id = best["fdcId"]
         nutrients = get_nutrition(fdc_id, api_key)
         return NutritionFacts(
