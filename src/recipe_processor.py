@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from tqdm import tqdm
+
 from src.config import RECIPES_PATH, CLEANED_RECIPES_PATH
 
 
@@ -103,3 +105,38 @@ def recipe_to_document(recipe: Recipe) -> str:
         f"{tags_part}"
         f" Serves {recipe.servings}, {recipe.prep_time_min} min."
     )
+
+
+def build_chroma_index(
+    recipes: list[Recipe],
+    collection,
+    embedding_model,
+    nutrition_cache: dict[str, dict],
+    batch_size: int = 256,
+) -> None:
+    documents = [recipe_to_document(r) for r in recipes]
+    embeddings = embedding_model.encode(
+        documents, batch_size=batch_size, show_progress_bar=True, normalize_embeddings=True
+    ).tolist()
+
+    for recipe, doc, emb in tqdm(
+        zip(recipes, documents, embeddings), total=len(recipes), desc="Upserting to ChromaDB"
+    ):
+        macros = compute_recipe_macros(recipe, nutrition_cache)
+        collection.upsert(
+            ids=[recipe.id],
+            embeddings=[emb],
+            documents=[doc],
+            metadatas=[{
+                "recipe_id": recipe.id,
+                "name": recipe.name,
+                "calories": round(macros["calories"], 1),
+                "protein": round(macros["protein"], 1),
+                "carbs": round(macros["carbs"], 1),
+                "fat": round(macros["fat"], 1),
+                "cost_usd": round(macros["cost_usd"] or recipe.estimated_cost_usd, 2),
+                "tags": "|".join(recipe.tags),
+                "ingredients": "|".join(i["name"] for i in recipe.ingredients[:20]),
+                "prep_time_min": recipe.prep_time_min,
+            }],
+        )
