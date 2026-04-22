@@ -1,0 +1,16 @@
+sentence-transformers==3.3.1
+chromadb==0.6.3
+groq>=0.13.0
+google-genai>=1.16.0
+streamlit>=1.41.0
+pandas
+numpy
+requests
+tqdm
+matplotlib
+seaborn
+rouge-score
+scikit-learn
+python-dotenv
+jupyterlab
+ipykernel
