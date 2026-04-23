@@ -24,7 +24,7 @@
     "protein_per_100g": 20.4,
     "fat_per_100g": 13.4,
     "carbs_per_100g": 0.0,
-    "price_per_100g": 0.90
+    "price_per_100g": 0.9
   },
   "tuna": {
     "fdc_id": 172006,
@@ -33,7 +33,7 @@
     "protein_per_100g": 25.5,
     "fat_per_100g": 0.8,
     "carbs_per_100g": 0.0,
-    "price_per_100g": 0.30
+    "price_per_100g": 0.3
   },
   "eggs": {
     "fdc_id": 748967,
@@ -42,7 +42,7 @@
     "protein_per_100g": 12.6,
     "fat_per_100g": 9.5,
     "carbs_per_100g": 0.7,
-    "price_per_100g": 0.20
+    "price_per_100g": 0.2
   },
   "tofu": {
     "fdc_id": 172475,
@@ -78,7 +78,7 @@
     "protein_per_100g": 3.2,
     "fat_per_100g": 3.3,
     "carbs_per_100g": 4.8,
-    "price_per_100g": 0.10
+    "price_per_100g": 0.1
   },
   "cheddar cheese": {
     "fdc_id": 173414,
@@ -87,7 +87,7 @@
     "protein_per_100g": 24.9,
     "fat_per_100g": 33.1,
     "carbs_per_100g": 1.3,
-    "price_per_100g": 0.50
+    "price_per_100g": 0.5
   },
   "brown rice": {
     "fdc_id": 169704,
@@ -114,7 +114,7 @@
     "protein_per_100g": 8.1,
     "fat_per_100g": 3.6,
     "carbs_per_100g": 39.4,
-    "price_per_100g": 0.20
+    "price_per_100g": 0.2
   },
   "oats": {
     "fdc_id": 173904,
@@ -132,7 +132,7 @@
     "protein_per_100g": 13.0,
     "fat_per_100g": 1.5,
     "carbs_per_100g": 75.0,
-    "price_per_100g": 0.10
+    "price_per_100g": 0.1
   },
   "whole wheat bread": {
     "fdc_id": 172688,
@@ -222,7 +222,7 @@
     "protein_per_100g": 6.4,
     "fat_per_100g": 0.5,
     "carbs_per_100g": 33.1,
-    "price_per_100g": 0.20
+    "price_per_100g": 0.2
   },
   "avocado": {
     "fdc_id": 171705,
@@ -231,7 +231,7 @@
     "protein_per_100g": 2.0,
     "fat_per_100g": 14.7,
     "carbs_per_100g": 8.5,
-    "price_per_100g": 0.40
+    "price_per_100g": 0.4
   },
   "banana": {
     "fdc_id": 173944,
@@ -240,7 +240,7 @@
     "protein_per_100g": 1.1,
     "fat_per_100g": 0.3,
     "carbs_per_100g": 22.8,
-    "price_per_100g": 0.10
+    "price_per_100g": 0.1
   },
   "apple": {
     "fdc_id": 171688,
@@ -258,7 +258,7 @@
     "protein_per_100g": 0.0,
     "fat_per_100g": 100.0,
     "carbs_per_100g": 0.0,
-    "price_per_100g": 0.60
+    "price_per_100g": 0.6
   },
   "peanut butter": {
     "fdc_id": 172470,
