@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacroMind — System Architecture</title>
+<style>
+  :root {
+    --v1: #6c8ebf; --v2: #82b366; --v3: #d6a84b; --v4: #b39ddb;
+    --dim: #ccc; --bg: #f8f9fa; --card-bg: #fff;
+    --radius: 10px; --shadow: 0 2px 8px rgba(0,0,0,.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         background: var(--bg); color: #333; padding: 24px; }
+
+  h1 { text-align: center; font-size: 1.5rem; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #666; font-size: .85rem; margin-bottom: 24px; }
+
+  /* ── Variant pills ── */
+  .pills { display: flex; gap: 10px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; }
+  .pill {
+    cursor: pointer; padding: 7px 20px; border-radius: 20px; font-size: .85rem;
+    font-weight: 600; border: 2px solid transparent; transition: all .2s;
+  }
+  .pill[data-v="v1"] { background: #e8f0fa; color: var(--v1); border-color: var(--v1); }
+  .pill[data-v="v2"] { background: #edf7ec; color: var(--v2); border-color: var(--v2); }
+  .pill[data-v="v3"] { background: #fdf5e6; color: var(--v3); border-color: var(--v3); }
+  .pill[data-v="v4"] { background: #f3f0fa; color: var(--v4); border-color: var(--v4); border-style: dashed; }
+  .pill.active { color: #fff; }
+  .pill[data-v="v1"].active { background: var(--v1); }
+  .pill[data-v="v2"].active { background: var(--v2); }
+  .pill[data-v="v3"].active { background: var(--v3); }
+  .pill[data-v="v4"].active { background: var(--v4); }
+  .pill.dim { opacity: .35; }
+
+  /* ── Pipeline grid ── */
+  .pipeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
+
+  /* Full-width rows */
+  .row { grid-column: 1 / -1; display: flex; gap: 14px; }
+  .row > .card { flex: 1; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--card-bg); border-radius: var(--radius); padding: 14px 16px;
+    box-shadow: var(--shadow); border-left: 4px solid #ddd;
+    transition: border-color .25s, opacity .25s;
+    position: relative;
+  }
+  .card h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; color: #888; margin-bottom: 4px; }
+  .card p  { font-size: .88rem; line-height: 1.45; }
+  .card .tag { display: inline-block; font-size: .7rem; padding: 2px 7px; border-radius: 4px;
+               background: #f0f0f0; color: #555; margin-top: 6px; margin-right: 3px; }
+  .card .proposed-badge {
+    position: absolute; top: 8px; right: 8px; font-size: .65rem;
+    background: var(--v4); color: #fff; padding: 2px 6px; border-radius: 4px;
+  }
+
+  /* Proposed cards */
+  .card.proposed { border: 2px dashed var(--v4); border-left: 2px dashed var(--v4); opacity: .6; }
+
+  /* Active state per variant */
+  .card.active-v1 { border-left-color: var(--v1); }
+  .card.active-v2 { border-left-color: var(--v2); }
+  .card.active-v3 { border-left-color: var(--v3); }
+  .card.dim { opacity: .25; }
+
+  /* ── Tooltips (CSS-only) ── */
+  .card .tip {
+    visibility: hidden; opacity: 0; background: #333; color: #fff;
+    font-size: .75rem; padding: 6px 10px; border-radius: 6px;
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    white-space: nowrap; z-index: 10; transition: opacity .15s;
+    pointer-events: none;
+  }
+  .card:hover .tip { visibility: visible; opacity: 1; }
+
+  /* ── Connector arrows ── */
+  .arrow-row { display: flex; justify-content: center; align-items: center;
+               gap: 14px; grid-column: 1 / -1; height: 20px; }
+  .arrow-row svg { width: 24px; height: 20px; flex-shrink: 0; }
+  .arrow-stroke { stroke: #ccc; transition: stroke .25s; }
+
+  footer { text-align: center; margin-top: 32px; font-size: .78rem; color: #999; }
+</style>
+</head>
+<body>
+
+<h1>MacroMind — System Architecture</h1>
+<p class="subtitle">Constraint-aware meal planning · Three implemented variants · One proposed extension</p>
+
+<div class="pills">
+  <div class="pill active" data-v="v1" onclick="select('v1')">V1 Baseline</div>
+  <div class="pill"        data-v="v2" onclick="select('v2')">V2 RAG</div>
+  <div class="pill"        data-v="v3" onclick="select('v3')">V3 RAG + Rerank</div>
+  <div class="pill"        data-v="v4" onclick="select('v4')">V4 Vision (proposed)</div>
+</div>
+
+<div class="pipeline">
+
+  <!-- Row 1: Input -->
+  <div class="row" id="row-input">
+    <div class="card" data-variants="v1 v2 v3 v4">
+      <h3>User Input</h3>
+      <p>Macro targets · Budget · Dietary tags · Pantry ingredients</p>
+      <span class="tag">UserConstraints</span>
+      <div class="tip">UserConstraints dataclass in src/retriever.py</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 2: Processing -->
+  <div class="row">
+    <div class="card" data-variants="v1 v2 v3 v4">
+      <h3>Input Processing</h3>
+      <p>build_query_text() — dietary tags first, budget/keto modifiers injected</p>
+      <span class="tag">src/retriever.py</span>
+      <div class="tip">Converts UserConstraints → NL query for embedding</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 3: Data Layer -->
+  <div class="row">
+    <div class="card" data-variants="v1 v2 v3 v4">
+      <h3>Data Layer</h3>
+      <p>9,999 recipes from RecipeNLG (2.2M total) + 65 curated · USDA FoodData Central (30 cached ingredients) · scored matching: Foundation > SR Legacy > Branded</p>
+      <span class="tag">src/data_pipeline.py</span>
+      <span class="tag">src/recipe_processor.py</span>
+      <div class="tip">load_cache(), score_usda_match(), batch_fetch_ingredients()</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 4: Embedding + Vision (proposed) -->
+  <div class="row">
+    <div class="card" data-variants="v2 v3 v4" style="flex:2">
+      <h3>Embedding</h3>
+      <p>all-MiniLM-L6-v2 · 384-dim · CPU/MPS · ChromaDB HNSW cosine</p>
+      <span class="tag">sentence-transformers</span>
+      <span class="tag">chromadb</span>
+      <div class="tip">SentenceTransformer, normalized embeddings, cosine distance</div>
+    </div>
+    <div class="card proposed" data-variants="v4">
+      <h3>Vision Module</h3>
+      <p>OCR food labels · photo-to-ingredient parsing · pantry detection</p>
+      <span class="tag">proposed</span>
+      <span class="proposed-badge">Proposed</span>
+      <div class="tip">V4 extension — not yet implemented</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 5: Retrieval -->
+  <div class="row">
+    <div class="card" data-variants="v2 v3 v4">
+      <h3>Retrieval (V2 / V3)</h3>
+      <p>semantic_search() — top-5 (V2) or top-20 (V3) · cosine distance sorted ascending</p>
+      <span class="tag">src/retriever.py</span>
+      <div class="tip">ChromaDB collection.query() → list[SearchResult]</div>
+    </div>
+    <div class="card" data-variants="v1">
+      <h3>V1 Baseline (no retrieval)</h3>
+      <p>LLM generates from parametric memory only · no recipe context injected</p>
+      <span class="tag">src/llm_generator.py</span>
+      <div class="tip">generate_baseline_plan_groq() — BASELINE_USER_PROMPT</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 6: Reranker -->
+  <div class="row">
+    <div class="card" data-variants="v3">
+      <h3>Constraint-Aware Reranker (V3)</h3>
+      <p>score = 1 − (0.5 × MAPE + 0.3 × budget_overshoot + 0.2 × waste_fraction)</p>
+      <p style="margin-top:4px">Hard penalty −999 for dietary tag violations</p>
+      <span class="tag">src/reranker.py</span>
+      <div class="tip">macro_deviation_score + budget_overshoot_score + ingredient_waste_fraction</div>
+    </div>
+    <div class="card" data-variants="v2">
+      <h3>Pass-through (V2)</h3>
+      <p>Top-5 semantic results passed directly to LLM — no reranking</p>
+      <div class="tip">SearchResult list → format_recipe_block() → RAG_USER_PROMPT</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 7: LLM Generation -->
+  <div class="row">
+    <div class="card" data-variants="v1 v2 v3 v4">
+      <h3>LLM Generation</h3>
+      <p>Primary: Groq / Llama 3.3 70B Versatile (free tier) · Fallback: Gemini 2.0 Flash</p>
+      <p style="margin-top:4px">temperature=0.4 · max_tokens=1500 · all prompts in prompts/meal_planner.py</p>
+      <span class="tag">src/llm_generator.py</span>
+      <span class="tag">prompts/meal_planner.py</span>
+      <div class="tip">generate_meal_plan_groq() / generate_baseline_plan_groq()</div>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div class="arrow-row">
+    <svg viewBox="0 0 24 20"><path class="arrow-stroke" fill="none" stroke-width="2" d="M12 2 L12 14 M8 11 L12 16 L16 11"/></svg>
+  </div>
+
+  <!-- Row 8: Output -->
+  <div class="row">
+    <div class="card" data-variants="v1 v2 v3 v4">
+      <h3>Output</h3>
+      <p>Structured meal plan · B/L/D/Snack with macro breakdown · Streamlit UI or notebook</p>
+      <span class="tag">app.py</span>
+      <span class="tag">notebooks/divya_evaluation.ipynb</span>
+      <div class="tip">Metrics: macro MAPE, Precision@5, waste fraction, budget adherence</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  MacroMind · MacroMind_master branch · Divya Jyoti · Berkeley 2026
+</footer>
+
+<script>
+var current = 'v1';
+
+function select(v) {
+  current = v;
+
+  // pills
+  document.querySelectorAll('.pill').forEach(p => {
+    p.classList.remove('active','dim');
+    if (p.dataset.v === v) p.classList.add('active');
+    else                   p.classList.add('dim');
+  });
+
+  // cards
+  document.querySelectorAll('.card').forEach(card => {
+    card.classList.remove('active-v1','active-v2','active-v3','dim');
+    var variants = (card.dataset.variants || '').split(' ');
+    if (variants.includes(v)) {
+      card.classList.add('active-' + v);
+    } else {
+      card.classList.add('dim');
+    }
+  });
+
+  // arrows
+  var colors = {v1:'#6c8ebf', v2:'#82b366', v3:'#d6a84b', v4:'#b39ddb'};
+  document.querySelectorAll('.arrow-stroke').forEach(el => {
+    el.style.stroke = colors[v] || '#ccc';
+  });
+}
+
+// Init
+select('v1');
+</script>
+</body>
+</html>
