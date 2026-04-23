@@ -24,6 +24,9 @@ class UserConstraints:
     budget_usd: float = 12.0
     available_ingredients: list[str] = None
     dietary_tags: list[str] = None
+    w_macro: float = 0.50
+    w_budget: float = 0.30
+    w_waste: float = 0.20
 
     def __post_init__(self):
         if self.available_ingredients is None:
