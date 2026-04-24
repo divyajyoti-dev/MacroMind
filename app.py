@@ -170,6 +170,19 @@ if submitted:
     if not api_key:
         st.error("Enter a Groq API key in the sidebar to generate a plan.")
     else:
+        if calories < 800:
+            st.error(
+                "This calorie target is below safe minimums. MacroMind cannot generate a plan at this level. "
+                "If you are struggling with food, please contact the **NEDA helpline: 1-800-931-2237** "
+                "(call or text) or visit nationaleatingdisorders.org."
+            )
+            st.stop()
+        elif calories < 1200:
+            st.warning(
+                "⚠️ This target is below the typical minimum for adults (1,200 kcal/day). "
+                "Consult a registered dietitian before following a plan at this level."
+            )
+
         if allergy_tags:
             st.warning(
                 "⚠️ Allergen filtering is based on ingredient names in the corpus and may not "
