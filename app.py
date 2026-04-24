@@ -123,6 +123,25 @@ if not st.session_state.get("consent"):
 
 st.header("Meal Planner")
 
+# Voice input lives outside the form so transcription triggers reactively
+if api_key:
+    audio_value = st.audio_input("🎤 Or speak your pantry ingredients")
+    if audio_value is not None:
+        try:
+            from groq import Groq as _Groq
+            _client = _Groq(api_key=api_key)
+            _transcript = _client.audio.transcriptions.create(
+                model="whisper-large-v3-turbo",
+                file=("pantry.wav", audio_value.getvalue(), "audio/wav"),
+                prompt="List of food ingredients, comma separated.",
+            )
+            st.session_state.pantry_raw = _transcript.text
+            st.success(f"Transcribed: {_transcript.text}")
+        except Exception as _e:
+            st.warning(f"Voice transcription failed: {_e}")
+else:
+    st.caption("Voice input requires a Groq API key (enter it in the sidebar).")
+
 with st.form("meal_plan_form"):
     col1, col2 = st.columns(2)
     with col1:
@@ -159,7 +178,11 @@ with st.form("meal_plan_form"):
             "or a certified halal/kosher supplier."
         )
 
-    pantry_raw = st.text_area("Pantry ingredients (comma-separated)", placeholder="chicken, rice, broccoli, eggs")
+    pantry_raw = st.text_area(
+        "Pantry ingredients (comma-separated)",
+        placeholder="chicken, rice, broccoli, eggs",
+        key="pantry_raw",
+    )
     available_ingredients = [i.strip() for i in pantry_raw.split(",") if i.strip()] if pantry_raw else []
 
     submitted = st.form_submit_button("Generate Meal Plan", type="primary")
