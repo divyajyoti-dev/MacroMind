@@ -23,6 +23,7 @@ Fat: {fat_g}g
 Budget: ${budget_usd:.2f} per day
 Available ingredients: {available_ingredients}
 Dietary requirements: {dietary_tags}
+Allergen restrictions (MUST avoid): {allergy_tags}
 
 Do not reference any specific recipes — use your knowledge to suggest meals.\
 """
@@ -38,6 +39,7 @@ Fat: {fat_g}g
 Budget: ${budget_usd:.2f} per day
 Available ingredients: {available_ingredients}
 Dietary requirements: {dietary_tags}
+Allergen restrictions (MUST avoid): {allergy_tags}
 
 Use the following retrieved recipes as your primary source. \
 You may adapt them but should stay close to their ingredient lists:
@@ -56,6 +58,7 @@ Fat: {fat_g}g
 Budget: ${budget_usd:.2f} per day
 Available ingredients: {available_ingredients}
 Dietary requirements: {dietary_tags}
+Allergen restrictions (MUST avoid): {allergy_tags}
 
 The following recipes have been pre-scored for how well they fit your constraints \
 (higher score = better fit). Prefer higher-scored options when building the plan:

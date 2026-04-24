@@ -57,6 +57,31 @@ def ingredient_waste_fraction(metadata: dict, constraints: UserConstraints) -> f
     return missing / len(recipe_ings)
 
 
+_ALLERGY_KEYWORDS: dict[str, set[str]] = {
+    "tree nuts": {"almond", "walnut", "pecan", "cashew", "pistachio", "hazelnut", "macadamia", "chestnut", "pine nut", "brazil nut"},
+    "peanuts": {"peanut", "groundnut"},
+    "dairy": {"milk", "cream", "butter", "cheese", "yogurt", "whey", "lactose", "casein", "mozzarella", "parmesan", "cheddar", "ricotta", "brie", "feta", "gouda", "buttermilk", "ghee"},
+    "eggs": {"egg", "eggs", "yolk"},
+    "shellfish": {"shrimp", "prawn", "crab", "lobster", "scallop", "clam", "oyster", "mussel", "crawfish", "crayfish"},
+    "fish": {"salmon", "tuna", "cod", "tilapia", "sardine", "mackerel", "herring", "halibut", "trout", "anchovy"},
+    "soy": {"soy", "tofu", "tempeh", "edamame", "soybean", "miso", "tamari"},
+    "wheat/gluten": {"flour", "wheat", "bread", "pasta", "barley", "rye", "noodle", "breadcrumb", "semolina", "spelt", "farro", "couscous"},
+    "sesame": {"sesame", "tahini"},
+}
+
+
+def allergy_ingredient_penalty(metadata: dict, constraints: UserConstraints) -> bool:
+    if not constraints.allergy_tags:
+        return False
+    ingredient_text = metadata.get("ingredients", "").lower()
+    ingredient_words = set(ingredient_text.replace("|", " ").split())
+    for allergen in constraints.allergy_tags:
+        keywords = _ALLERGY_KEYWORDS.get(allergen.lower(), set())
+        if ingredient_words & keywords:
+            return True
+    return False
+
+
 def dietary_tag_penalty(metadata: dict, constraints: UserConstraints) -> bool:
     if not constraints.dietary_tags:
         return False
@@ -74,21 +99,22 @@ def score_recipe(
     macro_dev = macro_deviation_score(metadata, constraints)
     budget_os = budget_overshoot_score(metadata, constraints)
     waste_frac = ingredient_waste_fraction(metadata, constraints)
-    has_penalty = dietary_tag_penalty(metadata, constraints)
+    has_dietary_penalty = dietary_tag_penalty(metadata, constraints)
+    has_allergy_penalty = allergy_ingredient_penalty(metadata, constraints)
 
     score = 1.0 - (
         constraints.w_macro * macro_dev
         + constraints.w_budget * budget_os
         + constraints.w_waste * waste_frac
     )
-    if has_penalty:
+    if has_dietary_penalty or has_allergy_penalty:
         score = -999.0
 
     components = {
         "macro_deviation": macro_dev,
         "cost_overshoot": budget_os,
         "waste_fraction": waste_frac,
-        "dietary_penalty": has_penalty,
+        "dietary_penalty": has_dietary_penalty or has_allergy_penalty,
     }
     return score, components
 

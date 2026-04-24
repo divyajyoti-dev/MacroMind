@@ -141,6 +141,12 @@ with st.form("meal_plan_form"):
         default=[],
     )
 
+    allergy_tags = st.multiselect(
+        "Allergen restrictions (FDA Big-9)",
+        options=["tree nuts", "peanuts", "dairy", "eggs", "shellfish", "fish", "soy", "wheat/gluten", "sesame"],
+        default=[],
+    )
+
     pantry_raw = st.text_area("Pantry ingredients (comma-separated)", placeholder="chicken, rice, broccoli, eggs")
     available_ingredients = [i.strip() for i in pantry_raw.split(",") if i.strip()] if pantry_raw else []
 
@@ -152,6 +158,12 @@ if submitted:
     if not api_key:
         st.error("Enter a Groq API key in the sidebar to generate a plan.")
     else:
+        if allergy_tags:
+            st.warning(
+                "⚠️ Allergen filtering is based on ingredient names in the corpus and may not "
+                "catch all sources of an allergen. Always read labels and verify with a healthcare provider."
+            )
+
         constraints = UserConstraints(
             calories=float(calories),
             protein_g=float(protein_g),
@@ -160,6 +172,7 @@ if submitted:
             budget_usd=float(budget_usd),
             available_ingredients=available_ingredients,
             dietary_tags=dietary_tags,
+            allergy_tags=allergy_tags,
         )
 
         with st.spinner("Generating meal plan…"):

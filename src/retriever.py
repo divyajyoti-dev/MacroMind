@@ -24,6 +24,7 @@ class UserConstraints:
     budget_usd: float = 12.0
     available_ingredients: list[str] = None
     dietary_tags: list[str] = None
+    allergy_tags: list[str] = None
     w_macro: float = 0.50
     w_budget: float = 0.30
     w_waste: float = 0.20
@@ -33,6 +34,8 @@ class UserConstraints:
             self.available_ingredients = []
         if self.dietary_tags is None:
             self.dietary_tags = []
+        if self.allergy_tags is None:
+            self.allergy_tags = []
 
 
 def get_or_create_collection(
