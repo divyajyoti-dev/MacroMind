@@ -70,6 +70,42 @@ _ALLERGY_KEYWORDS: dict[str, set[str]] = {
 }
 
 
+_CULTURAL_EXCLUSIONS: dict[str, set[str]] = {
+    "halal": {"pork", "lard", "bacon", "ham", "prosciutto", "wine", "beer", "liqueur", "brandy", "rum", "vodka", "sake"},
+    "kosher": {"pork", "lard", "bacon", "ham", "shrimp", "prawn", "crab", "lobster", "scallop", "clam", "oyster", "mussel"},
+    "jain": {
+        "chicken", "beef", "pork", "lamb", "turkey", "salmon", "tuna", "shrimp", "bacon", "ham", "sausage",
+        "fish", "seafood", "crab", "lobster",
+        "potato", "onion", "garlic", "carrot", "beet", "beetroot", "turnip", "radish",
+    },
+    "hindu vegetarian (no beef)": {"beef", "veal", "pork", "lard", "bacon", "ham", "bison"},
+    "buddhist (no meat)": {
+        "chicken", "beef", "pork", "lamb", "turkey", "salmon", "tuna", "shrimp", "bacon", "ham",
+        "sausage", "fish", "seafood", "crab", "lobster", "anchovies",
+    },
+}
+
+# kosher also forbids mixing meat + dairy in the same recipe
+_KOSHER_MEAT = {"chicken", "beef", "pork", "lamb", "turkey", "veal", "duck", "bison"}
+_KOSHER_DAIRY = {"milk", "cream", "butter", "cheese", "yogurt", "whey", "casein", "ghee"}
+
+
+def cultural_dietary_penalty(metadata: dict, constraints: UserConstraints) -> bool:
+    if not constraints.cultural_dietary:
+        return False
+    ingredient_words = set(metadata.get("ingredients", "").lower().replace("|", " ").split())
+    for filter_name in constraints.cultural_dietary:
+        exclusions = _CULTURAL_EXCLUSIONS.get(filter_name.lower(), set())
+        if ingredient_words & exclusions:
+            return True
+        if filter_name.lower() == "kosher":
+            has_meat = bool(ingredient_words & _KOSHER_MEAT)
+            has_dairy = bool(ingredient_words & _KOSHER_DAIRY)
+            if has_meat and has_dairy:
+                return True
+    return False
+
+
 def allergy_ingredient_penalty(metadata: dict, constraints: UserConstraints) -> bool:
     if not constraints.allergy_tags:
         return False
@@ -101,20 +137,21 @@ def score_recipe(
     waste_frac = ingredient_waste_fraction(metadata, constraints)
     has_dietary_penalty = dietary_tag_penalty(metadata, constraints)
     has_allergy_penalty = allergy_ingredient_penalty(metadata, constraints)
+    has_cultural_penalty = cultural_dietary_penalty(metadata, constraints)
 
     score = 1.0 - (
         constraints.w_macro * macro_dev
         + constraints.w_budget * budget_os
         + constraints.w_waste * waste_frac
     )
-    if has_dietary_penalty or has_allergy_penalty:
+    if has_dietary_penalty or has_allergy_penalty or has_cultural_penalty:
         score = -999.0
 
     components = {
         "macro_deviation": macro_dev,
         "cost_overshoot": budget_os,
         "waste_fraction": waste_frac,
-        "dietary_penalty": has_dietary_penalty or has_allergy_penalty,
+        "dietary_penalty": has_dietary_penalty or has_allergy_penalty or has_cultural_penalty,
     }
     return score, components
 

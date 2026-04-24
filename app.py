@@ -147,6 +147,18 @@ with st.form("meal_plan_form"):
         default=[],
     )
 
+    cultural_dietary = st.multiselect(
+        "Cultural / religious dietary requirements",
+        options=["halal", "kosher", "jain", "hindu vegetarian (no beef)", "buddhist (no meat)"],
+        default=[],
+    )
+    if cultural_dietary:
+        st.caption(
+            "Cultural and religious dietary filters use ingredient-level heuristics and cannot "
+            "guarantee full compliance with religious law. Verify with your religious authority "
+            "or a certified halal/kosher supplier."
+        )
+
     pantry_raw = st.text_area("Pantry ingredients (comma-separated)", placeholder="chicken, rice, broccoli, eggs")
     available_ingredients = [i.strip() for i in pantry_raw.split(",") if i.strip()] if pantry_raw else []
 
@@ -173,6 +185,7 @@ if submitted:
             available_ingredients=available_ingredients,
             dietary_tags=dietary_tags,
             allergy_tags=allergy_tags,
+            cultural_dietary=cultural_dietary,
         )
 
         with st.spinner("Generating meal plan…"):

@@ -23,6 +23,7 @@ def _format_constraints(constraints: UserConstraints) -> dict:
         "available_ingredients": ", ".join(constraints.available_ingredients) or "any",
         "dietary_tags": ", ".join(constraints.dietary_tags) or "none",
         "allergy_tags": ", ".join(constraints.allergy_tags) if constraints.allergy_tags else "none",
+        "cultural_dietary": ", ".join(constraints.cultural_dietary) if constraints.cultural_dietary else "none",
     }
 
 

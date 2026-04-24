@@ -24,6 +24,7 @@ Budget: ${budget_usd:.2f} per day
 Available ingredients: {available_ingredients}
 Dietary requirements: {dietary_tags}
 Allergen restrictions (MUST avoid): {allergy_tags}
+Cultural/religious dietary requirements: {cultural_dietary}
 
 Do not reference any specific recipes — use your knowledge to suggest meals.\
 """
@@ -40,6 +41,7 @@ Budget: ${budget_usd:.2f} per day
 Available ingredients: {available_ingredients}
 Dietary requirements: {dietary_tags}
 Allergen restrictions (MUST avoid): {allergy_tags}
+Cultural/religious dietary requirements: {cultural_dietary}
 
 Use the following retrieved recipes as your primary source. \
 You may adapt them but should stay close to their ingredient lists:
@@ -59,6 +61,7 @@ Budget: ${budget_usd:.2f} per day
 Available ingredients: {available_ingredients}
 Dietary requirements: {dietary_tags}
 Allergen restrictions (MUST avoid): {allergy_tags}
+Cultural/religious dietary requirements: {cultural_dietary}
 
 The following recipes have been pre-scored for how well they fit your constraints \
 (higher score = better fit). Prefer higher-scored options when building the plan:
