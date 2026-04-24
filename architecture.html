@@ -59,6 +59,7 @@
 
   /* Proposed cards */
   .card.proposed { border: 2px dashed var(--v4); border-left: 2px dashed var(--v4); opacity: .6; }
+  .card[data-variants="v4"]:not(.proposed) { border-left-color: var(--v4); }
 
   /* Active state per variant */
   .card.active-v1 { border-left-color: var(--v1); }
@@ -94,7 +95,7 @@
   <div class="pill active" data-v="v1" onclick="select('v1')">V1 Baseline</div>
   <div class="pill"        data-v="v2" onclick="select('v2')">V2 RAG</div>
   <div class="pill"        data-v="v3" onclick="select('v3')">V3 RAG + Rerank</div>
-  <div class="pill"        data-v="v4" onclick="select('v4')">V4 Vision (proposed)</div>
+  <div class="pill"        data-v="v4" onclick="select('v4')">V4 Vision</div>
 </div>
 
 <div class="pipeline">
@@ -154,12 +155,11 @@
       <span class="tag">chromadb</span>
       <div class="tip">SentenceTransformer, normalized embeddings, cosine distance</div>
     </div>
-    <div class="card proposed" data-variants="v4">
+    <div class="card" data-variants="v4">
       <h3>Vision Module</h3>
-      <p>OCR food labels · photo-to-ingredient parsing · pantry detection</p>
-      <span class="tag">proposed</span>
-      <span class="proposed-badge">Proposed</span>
-      <div class="tip">V4 extension — not yet implemented</div>
+      <p>Fridge/pantry photo upload · Gemini 2.0 Flash vision · ingredient extraction</p>
+      <span class="tag">v4</span>
+      <div class="tip">st.file_uploader → Gemini vision → pantry field auto-populate</div>
     </div>
   </div>
 

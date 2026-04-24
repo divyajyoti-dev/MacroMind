@@ -1,3 +1,5 @@
+import base64
+
 from groq import Groq
 from google import genai as google_genai
 from google.genai import types as genai_types
@@ -93,6 +95,20 @@ def generate_baseline_plan(
         ),
     )
     return response.text
+
+
+def extract_ingredients_from_image(image_bytes: bytes, api_key: str) -> str:
+    """Send a fridge/pantry photo to Gemini vision and return a comma-separated ingredient list."""
+    client = google_genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=[
+            genai_types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg"),
+            "List the food ingredients visible in this image, comma-separated. "
+            "Only list recognisable food items. Do not include brands, packaging, or non-food items.",
+        ],
+    )
+    return response.text.strip()
 
 
 def generate_meal_plan(

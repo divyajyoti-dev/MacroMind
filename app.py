@@ -7,7 +7,7 @@ from src.config import EMBEDDING_MODEL
 from src.retriever import get_or_create_collection, semantic_search, UserConstraints, build_query_text
 from src.reranker import rerank, RankedResult
 from src.data_pipeline import load_cache
-from src.llm_generator import generate_baseline_plan_groq, generate_meal_plan_groq
+from src.llm_generator import generate_baseline_plan_groq, generate_meal_plan_groq, extract_ingredients_from_image
 from src.recipe_processor import load_recipes, load_cleaned_recipes, build_chroma_index
 
 st.set_page_config(page_title="MacroMind", page_icon="🥗", layout="wide")
@@ -141,6 +141,25 @@ if api_key:
             st.warning(f"Voice transcription failed: {_e}")
 else:
     st.caption("Voice input requires a Groq API key (enter it in the sidebar).")
+
+import os as _os
+_google_api_key = _os.getenv("GOOGLE_API_KEY", "")
+if _google_api_key:
+    uploaded_image = st.file_uploader(
+        "📷 Or upload a fridge/pantry photo",
+        type=["jpg", "jpeg", "png"],
+        help="MacroMind will detect ingredients from the image using Gemini vision.",
+    )
+    if uploaded_image is not None:
+        try:
+            _img_bytes = uploaded_image.read()
+            _detected = extract_ingredients_from_image(_img_bytes, _google_api_key)
+            st.session_state.pantry_raw = _detected
+            st.success(f"Detected ingredients: {_detected}")
+        except Exception as _e:
+            st.warning(f"Image ingredient detection failed: {_e}")
+else:
+    st.caption("Image pantry detection requires a Google API key (set GOOGLE_API_KEY in .env).")
 
 with st.form("meal_plan_form"):
     col1, col2 = st.columns(2)
