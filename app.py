@@ -84,6 +84,17 @@ with st.sidebar:
             build_chroma_index(recipes, col, model, nutrition_cache)
         st.success(f"Done. {col.count()} recipes indexed.")
 
+    st.divider()
+    with st.expander("⚠️ Corpus limitations"):
+        st.caption(
+            "RecipeNLG is sourced from English-language cooking websites — Western and American "
+            "cuisine is overrepresented. South Asian, West African, East Asian, Latin American, "
+            "and Middle Eastern food traditions are largely absent. TheMealDB adds ~300 globally "
+            "diverse recipes. Pricing uses US grocery estimates. Macro values for RecipeNLG recipes "
+            "are estimated from 100 g-per-ingredient defaults, not verified weights. "
+            "Do not use for clinical dietary planning."
+        )
+
 # ── Main form ──────────────────────────────────────────────────────────────────
 
 st.header("Meal Planner")
